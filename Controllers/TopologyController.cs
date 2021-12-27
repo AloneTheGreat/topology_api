@@ -1,10 +1,6 @@
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using topology_api.repositories;
 using topology_api.modules;
-using System.Linq;
-using topology_api.Dtos;
-
 namespace topology_api.Controllers
 {
     [ApiController]
@@ -18,42 +14,41 @@ namespace topology_api.Controllers
             this.repository = repository;
         }
         [HttpGet]
-        public IEnumerable<TopologyDto> Get_Topologies()
+        public IEnumerable<Topology> Get_Topologies()
         {
-            var items = repository.Get_Topologies().Select( item => item.AsDto());
+            var items = repository.Get_Topologies().Select( item => item);
             return items;
         }
         [HttpGet("{id}")]
-        public ActionResult<TopologyDto> Get_Topology(string id)
+        public ActionResult<Topology> Get_Topology(string id)
         {
             var item = repository.Get_Topology(id);
             if (item is null)
             {
                 return NotFound();
             }
-            return item.AsDto();
+            return item;
         }
         [HttpGet("{id}/components")]
-        public ActionResult<List<TopologyComponentsDto>> Get_Topology_Components(string id)
+        public ActionResult<List<TopologyComponents>> Get_Topology_Components(string id)
         {
             var item = repository.Get_Topology(id);
             if (item is null)
             {
                 return NotFound();
             }
-            return item.AsDto().components;
+            return item.components;
         }
         [HttpGet("{id},{netlist_id}/components")]
-        public ActionResult<List<TopologyComponentsDto>> Get_Topology_NetList_Components(string id, string netlist_id)
+        public ActionResult<List<TopologyComponents>> Get_Topology_NetList_Components(string id, string netlist_id)
         {
             var item = repository.Get_Topology(id);
             if (item is null)
             {
                 return NotFound();
             }
-
-            List<TopologyComponentsDto> enumerable = (List<TopologyComponentsDto>)item.AsDto().components.Where(TopologyComponentsDto => TopologyComponentsDto.netlist.Values.Equals(netlist_id));
-            return enumerable;
+            var result = from s in item.components where s.netlist.ContainsValue(netlist_id) select s;
+            return result.ToList();
         }
         [HttpDelete("{id}")]
         public ActionResult Delete_Topology(string id)
@@ -67,23 +62,10 @@ namespace topology_api.Controllers
             return NoContent();
         }
         [HttpPost]
-        public ActionResult<TopologyDto> Create_Topology(TopologyDto topologyDto)
+        public ActionResult<Topology> Create_Topology(Topology topology)
         {
-            Topology topology = new(){
-                id = topologyDto.id,
-                components = new List<TopologyComponents>().Select( component => new TopologyComponents(){
-                    type = component.type,
-                    id = component.id,
-                    value = new Values(){
-                        @default = component.value.@default,
-                        min = component.value.min,
-                        max = component.value.max,
-                    },
-                    netlist = component.netlist,
-                })
-            };
             repository.Create_Topology(topology: topology);
-            return CreatedAtAction(actionName: nameof(Get_Topology), routeValues: new {id = topology.id}, value: topology.AsDto());
+            return CreatedAtAction(actionName: nameof(Get_Topology), routeValues: new {id = topology.id}, value: topology);
         }
     }
 }

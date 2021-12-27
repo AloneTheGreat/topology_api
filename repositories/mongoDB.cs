@@ -1,3 +1,4 @@
+using MongoDB.Bson;
 using MongoDB.Driver;
 using topology_api.modules;
 
@@ -8,6 +9,7 @@ namespace topology_api.repositories
         private const string DatabaseName = "Topology_Api";
         public const string CollectionName = "topologies";
         private readonly IMongoCollection<Topology> topologiesCollection;
+        private readonly FilterDefinitionBuilder<Topology> filterBuilder = Builders<Topology>.Filter;
         public MongoDb(IMongoClient mongoClient)
         {
             IMongoDatabase database = mongoClient.GetDatabase(DatabaseName);
@@ -20,17 +22,19 @@ namespace topology_api.repositories
 
         public void Delete_Topology(string id)
         {
-            throw new NotImplementedException();
+            var filter = filterBuilder.Eq(topology => topology.id, id);
+            topologiesCollection.DeleteOne(filter);
         }
 
         public IEnumerable<Topology> Get_Topologies()
         {
-            throw new NotImplementedException();
+            return topologiesCollection.Find(new BsonDocument()).ToList();
         }
 
         public Topology Get_Topology(string id)
         {
-            throw new NotImplementedException();
+            var filter = filterBuilder.Eq(topology => topology.id, id);
+            return topologiesCollection.Find(filter).SingleOrDefault();
         }
     }
 }
