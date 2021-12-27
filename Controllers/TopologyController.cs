@@ -44,7 +44,7 @@ namespace topology_api.Controllers
             return item.components;
         }
 
-        [HttpGet("{id},{netlist_id}/components")]
+        [HttpGet("{id}/components/{netlist_id}")]
         public async  Task<ActionResult<List<TopologyComponents>>> Get_Topology_NetList_Components_Async(string id, string netlist_id)
         {
             var item = await repository.Get_Topology_Async(id);
