@@ -14,7 +14,10 @@ builder.Services.AddSingleton<IMongoClient>(ServiceProvider =>
 
 builder.Services.AddSingleton<Imemory, MongoDb>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers( options => 
+{
+    options.SuppressAsyncSuffixInActionNames = false;
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

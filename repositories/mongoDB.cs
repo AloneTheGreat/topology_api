@@ -15,26 +15,26 @@ namespace topology_api.repositories
             IMongoDatabase database = mongoClient.GetDatabase(DatabaseName);
             topologiesCollection = database.GetCollection<Topology>(CollectionName);
         }
-        public void Create_Topology(Topology topology)
+        public async Task Create_Topology_Async(Topology topology)
         {
-            topologiesCollection.InsertOne(topology);
+            await topologiesCollection.InsertOneAsync(topology);
         }
 
-        public void Delete_Topology(string id)
+        public async  Task Delete_Topology_Async(string id)
         {
             var filter = filterBuilder.Eq(topology => topology.id, id);
-            topologiesCollection.DeleteOne(filter);
+            await topologiesCollection.DeleteOneAsync(filter);
         }
 
-        public IEnumerable<Topology> Get_Topologies()
+        public async  Task<IEnumerable<Topology>> Get_Topologies_Async()
         {
-            return topologiesCollection.Find(new BsonDocument()).ToList();
+            return await topologiesCollection.Find(new BsonDocument()).ToListAsync();
         }
 
-        public Topology Get_Topology(string id)
+        public async  Task<Topology> Get_Topology_Async(string id)
         {
             var filter = filterBuilder.Eq(topology => topology.id, id);
-            return topologiesCollection.Find(filter).SingleOrDefault();
+            return await topologiesCollection.Find(filter).SingleOrDefaultAsync();
         }
     }
 }

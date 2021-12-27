@@ -13,36 +13,41 @@ namespace topology_api.Controllers
         {
             this.repository = repository;
         }
+
         [HttpGet]
-        public IEnumerable<Topology> Get_Topologies()
+        public async  Task<IEnumerable<Topology>> Get_Topologies_Async()
         {
-            var items = repository.Get_Topologies().Select( item => item);
+            var items = (await repository.Get_Topologies_Async())
+                        .Select( item => item);
             return items;
         }
+
         [HttpGet("{id}")]
-        public ActionResult<Topology> Get_Topology(string id)
+        public async  Task<ActionResult<Topology>> Get_Topology_Async(string id)
         {
-            var item = repository.Get_Topology(id);
+            var item = await repository.Get_Topology_Async(id);
             if (item is null)
             {
                 return NotFound();
             }
             return item;
         }
+
         [HttpGet("{id}/components")]
-        public ActionResult<List<TopologyComponents>> Get_Topology_Components(string id)
+        public async  Task<ActionResult<List<TopologyComponents>>> Get_Topology_Components_Async(string id)
         {
-            var item = repository.Get_Topology(id);
+            var item = await repository.Get_Topology_Async(id);
             if (item is null)
             {
                 return NotFound();
             }
             return item.components;
         }
+
         [HttpGet("{id},{netlist_id}/components")]
-        public ActionResult<List<TopologyComponents>> Get_Topology_NetList_Components(string id, string netlist_id)
+        public async  Task<ActionResult<List<TopologyComponents>>> Get_Topology_NetList_Components_Async(string id, string netlist_id)
         {
-            var item = repository.Get_Topology(id);
+            var item = await repository.Get_Topology_Async(id);
             if (item is null)
             {
                 return NotFound();
@@ -50,22 +55,24 @@ namespace topology_api.Controllers
             var result = from s in item.components where s.netlist.ContainsValue(netlist_id) select s;
             return result.ToList();
         }
+
         [HttpDelete("{id}")]
-        public ActionResult Delete_Topology(string id)
+        public async  Task<ActionResult> Delete_Topology_Async(string id)
         {
-            var existingTopology = repository.Get_Topology(id);
+            var existingTopology = await repository.Get_Topology_Async(id);
             if (existingTopology is null)
             {
                 return NotFound();
             }
-            repository.Delete_Topology(id);
+            await repository.Delete_Topology_Async(id);
             return NoContent();
         }
+
         [HttpPost]
-        public ActionResult<Topology> Create_Topology(Topology topology)
+        public async  Task<ActionResult<Topology>> Create_Topology_Async(Topology topology)
         {
-            repository.Create_Topology(topology: topology);
-            return CreatedAtAction(actionName: nameof(Get_Topology), routeValues: new {id = topology.id}, value: topology);
+            await repository.Create_Topology_Async(topology: topology);
+            return CreatedAtAction(actionName: nameof(Get_Topology_Async), routeValues: new {id = topology.id}, value: topology);
         }
     }
 }

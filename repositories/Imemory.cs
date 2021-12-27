@@ -4,10 +4,10 @@ namespace topology_api.repositories
 {
     public interface Imemory
     {
-        Topology Get_Topology(string id);
-        IEnumerable<Topology> Get_Topologies();
-        void Create_Topology(Topology topology);
-        void Delete_Topology(string id);
+        Task<Topology> Get_Topology_Async(string id);
+        Task<IEnumerable<Topology>> Get_Topologies_Async();
+        Task Create_Topology_Async(Topology topology);
+        Task Delete_Topology_Async(string id);
     }
 
 }
