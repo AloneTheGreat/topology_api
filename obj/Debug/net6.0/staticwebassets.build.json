@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "0cDJmtPynaNz2tmZJWsDRqz+HrS29CaIQHCV27syfkg=",
+  "Source": "topology_api",
+  "BasePath": "_content/topology_api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
