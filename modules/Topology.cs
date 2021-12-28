@@ -7,6 +7,7 @@ namespace topology_api.modules
     {
         [Required]
         public string id { get; set; }
+        
         [Required]
         public List<TopologyComponents> components { get; set; }
     }

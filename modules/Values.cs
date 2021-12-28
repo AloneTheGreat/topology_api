@@ -8,8 +8,10 @@ namespace topology_api.modules
     {
         [Required]
         public double @default { get; set; }
+
         [Required]
         public double min { get; set; }
+        
         [Required]
         public double max { get; set; }
     }
