@@ -43,3 +43,6 @@ F:\computer science\Software Engineering Intern\topology_api\bin\Debug\net6.0\ru
 F:\computer science\Software Engineering Intern\topology_api\bin\Debug\net6.0\runtimes\osx\native\libmongocrypt.dylib
 F:\computer science\Software Engineering Intern\topology_api\bin\Debug\net6.0\runtimes\win\native\mongocrypt.dll
 F:\computer science\Software Engineering Intern\topology_api\bin\Debug\net6.0\HealthChecks.MongoDb.dll
+F:\computer science\Software Engineering Intern\topology_api\bin\Debug\net6.0\Json.Net.dll
+F:\computer science\Software Engineering Intern\topology_api\bin\Debug\net6.0\Newtonsoft.Json.dll
+F:\computer science\Software Engineering Intern\topology_api\bin\Debug\net6.0\Results\top1.json

@@ -44,9 +44,17 @@
               "target": "Package",
               "version": "[5.0.1, )"
             },
+            "Json.Net": {
+              "target": "Package",
+              "version": "[1.0.33, )"
+            },
             "MongoDB.Driver": {
               "target": "Package",
               "version": "[2.14.1, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[11.0.2, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

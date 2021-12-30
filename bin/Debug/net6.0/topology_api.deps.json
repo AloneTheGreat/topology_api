@@ -9,7 +9,9 @@
       "topology_api/1.0.0": {
         "dependencies": {
           "AspNetCore.HealthChecks.MongoDb": "5.0.1",
+          "Json.Net": "1.0.33",
           "MongoDB.Driver": "2.14.1",
+          "Newtonsoft.Json": "11.0.2",
           "Swashbuckle.AspNetCore": "6.2.3"
         },
         "runtime": {
@@ -33,6 +35,14 @@
           "lib/netstandard2.1/DnsClient.dll": {
             "assemblyVersion": "1.4.0.0",
             "fileVersion": "1.4.0.0"
+          }
+        }
+      },
+      "Json.Net/1.0.33": {
+        "runtime": {
+          "lib/netstandard2.0/Json.Net.dll": {
+            "assemblyVersion": "1.0.33.1",
+            "fileVersion": "1.0.33.1"
           }
         }
       },
@@ -181,6 +191,14 @@
           }
         }
       },
+      "Newtonsoft.Json/11.0.2": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "11.0.0.0",
+            "fileVersion": "11.0.2.21924"
+          }
+        }
+      },
       "SharpCompress/0.30.1": {
         "runtime": {
           "lib/net5.0/SharpCompress.dll": {
@@ -250,6 +268,13 @@
       "sha512": "sha512-CO1NG1zQdV0nEAXmr/KppLZ0S1qkaPwV0kPX5YPgmYBtrBVh1XMYHM54IXy3RBJu1k4thFtpzwo4HNHqxiuFYw==",
       "path": "dnsclient/1.4.0",
       "hashPath": "dnsclient.1.4.0.nupkg.sha512"
+    },
+    "Json.Net/1.0.33": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5tE+db6BqhRAvITIVBeRsQorLGshPExfm4FmMRvWWAfs4RxeTbFFj2PIEybwmMW0qR30HKkXDYhq0YkDK2Jtxw==",
+      "path": "json.net/1.0.33",
+      "hashPath": "json.net.1.0.33.nupkg.sha512"
     },
     "Microsoft.Extensions.ApiDescription.Server/3.0.0": {
       "type": "package",
@@ -355,6 +380,13 @@
       "sha512": "sha512-BAvqY/otOsmAGTsmzIYXRFysvpu8X7rYkDzEBX4iBlrF57SB+fD5px9sCPR6sETgfZ6k98qUNS6go5wtY9WOBA==",
       "path": "mongodb.libmongocrypt/1.3.0",
       "hashPath": "mongodb.libmongocrypt.1.3.0.nupkg.sha512"
+    },
+    "Newtonsoft.Json/11.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ==",
+      "path": "newtonsoft.json/11.0.2",
+      "hashPath": "newtonsoft.json.11.0.2.nupkg.sha512"
     },
     "SharpCompress/0.30.1": {
       "type": "package",
