@@ -84,10 +84,10 @@ namespace topology_api.Controllers
         }
 
         [HttpPost]
-        public async  Task<ActionResult<Topology>> Create_Topology_Async(string json_file_path)
+        public async  Task<ActionResult<Topology>> Create_Topology_Async(CreateTopologyDto obj)
         {
-            string json_text = System.IO.File.ReadAllText(json_file_path);
-            CreateTopologyDto obj = JsonConvert.DeserializeObject<CreateTopologyDto>(json_text);
+            // string json_text = System.IO.File.ReadAllText(json_file_path);
+            // CreateTopologyDto obj = JsonConvert.DeserializeObject<CreateTopologyDto>(topologyDto);
             Topology topology = new Topology();
             topology.id = obj.id;
             topology.components = new List<TopologyComponents>();
@@ -106,11 +106,17 @@ namespace topology_api.Controllers
                             break;
 
                         case "netlist":
-                            components.netlist = component[key].ToObject<Dictionary<string, string>>();
+                            components.netlist = new Dictionary<string, string>(){};
+                            components.netlist = JsonConvert.DeserializeObject<Dictionary<string, string>>(component[key].ToString());
+                            // components.netlist = component[key].ToObject<Dictionary<string, string>>();
                             break;
 
                         default:
-                            components.value = component[key].ToObject<Values>();
+                            components.value = new Values(){};
+                            components.value = JsonConvert.DeserializeObject<Values>(component[key].ToString());
+                            // components.value.@default = component[key]["default"];
+                            // components.value.min = component[key].min;
+                            // components.value.max = component[key].max;
                             components.value_Id = key.ToString();
                             break;
                     }
